@@ -1,0 +1,85 @@
+{
+  "name": "test2",
+  "level": 2,
+  "description": "AAAAAAA",
+  "welcomeMsg": "AAAAAAAA",
+  "quests": [
+    {
+      "name": "testquest",
+      "level": 1,
+      "description": "test",
+      "xp_reward": 10000,
+      "credit_reward": 100000,
+      "prerequisite_LVL": 1,
+      "prerequisite_INT": 1,
+      "steps": [
+        {
+          "text": "test text"
+        },
+        {
+          "items": [
+            {
+              "name": "Bandage",
+              "icon": "\uD83E\uDE79",
+              "description": "Restores some health.",
+              "value": 1,
+              "canEquip": false,
+              "canUse": true
+            },
+            {
+              "name": "Knife",
+              "icon": "??",
+              "description": "a knife",
+              "value": 12,
+              "canEquip": true,
+              "canUse": false
+            }
+          ]
+        },
+        {
+          "enemies": [
+            {
+              "name": "testE",
+              "Level": 1,
+              "hp": 100,
+              "speed": 1,
+              "int": 1,
+              "luck": 1,
+              "credits": 100,
+              "loot": []
+            }
+          ]
+        },
+        {
+          "moveTo": "test2"
+        }
+      ],
+      "currentStageIndex": 0
+    }
+  ],
+  "enemies": [
+    {
+      "name": "DD-Drone",
+      "Level": 2,
+      "hp": 100,
+      "speed": 4,
+      "int": 4,
+      "luck": 4,
+      "credits": 1000,
+      "loot": []
+    }
+  ],
+  "shop": [
+    {
+      "name": "Drink",
+      "icon": "\uD83C\uDF79",
+      "description": "Refreshing Drink",
+      "value": 30,
+      "canEquip": false,
+      "canUse": false
+    }
+  ],
+  "x": 0,
+  "y": 0,
+  "Visitors": []
+}

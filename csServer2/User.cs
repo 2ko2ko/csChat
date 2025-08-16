@@ -568,7 +568,15 @@ namespace SocketServer
             if (!string.IsNullOrEmpty(CurrentLocation))
             {
                 Location oldLoc = Program.FindLocation(world, CurrentLocation);
-                oldLoc.Visitors.Remove(this);
+                try
+                {
+                    oldLoc.Visitors.Remove(this); // remove user from old location visitors
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine("Error removing user from old location visitors: " + e.Message);
+                }
+                //oldLoc.Visitors.Remove(this);
             }
             Location loc = Program.FindLocation(world, locationName);
             loc.Visitors.Add(this);   // add user to location visitors

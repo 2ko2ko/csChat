@@ -2,10 +2,10 @@
   "name": "Landing-Bay",
   "level": 2,
   "description": "Ships park here.",
-  "welcomeMsg": "Welcome to Location name",
+  "welcomeMsg": "Welcome to the Landing Bay",
   "quests": [
     {
-      "name": "Drone-Slaughter",
+      "name": "D-Slaughter",
       "level": 2,
       "description": "You need to kill 9 Rouge Drones and their Mother Drone",
       "xp_reward": 24,

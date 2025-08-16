@@ -16,6 +16,10 @@ namespace SocketServer
         public string Description { get; set; }
         [JsonPropertyName("value")]
         public int Value { get; set; }
+        // [JsonPropertyName("canEquip")]
+        // public bool CanEquip { get; set; }
+        // [JsonPropertyName("canUse")]
+        // public bool CanUse { get; set; }
 
         [JsonConstructor]
         public Item()

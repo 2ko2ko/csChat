@@ -147,7 +147,7 @@ namespace SocketServer
         }
         public static void CreateJsonFile(Location location)
         {
-            if (File.Exists($"locations/{location.Name}/{location.Name}.json"))
+            if (File.Exists($"world/{location.Name}/{location.Name}.json"))
             {
                 return;
             }
@@ -160,8 +160,8 @@ namespace SocketServer
             // Serialize the user object to json format using the options
             string json = JsonSerializer.Serialize(location, options);
             // Write the json string to a file with the username as the file name
-            Directory.CreateDirectory($"locations/{location.Name}");
-            File.WriteAllText($"locations/{location.Name}/{location.Name}.json", json);
+            Directory.CreateDirectory($"world/{location.Name}");
+            File.WriteAllText($"world/{location.Name}/{location.Name}.json", json);
         }
         public void SaveToJsonFile(Location location)
         {
@@ -174,14 +174,14 @@ namespace SocketServer
             // Serialize the user object to json format using the options
             string json = JsonSerializer.Serialize(location, options);
             // Write the json string to a file with the username as the file name
-            Directory.CreateDirectory($"locations/{location.Name}");
-            File.WriteAllText($"locations/{location.Name}/{location.Name}.json", json);
+            Directory.CreateDirectory($"world/{location.Name}");
+            File.WriteAllText($"world/{location.Name}/{location.Name}.json", json);
         }
         public static Location LoadFromJsonFile(string name)
         {
-            if (File.Exists($"locations/{name}/{name}.json"))
+            if (File.Exists($"world/{name}/{name}.json"))
             {
-                return JsonSerializer.Deserialize<Location>(File.ReadAllText($"locations/{name}/{name}.json"));
+                return JsonSerializer.Deserialize<Location>(File.ReadAllText($"world/{name}/{name}.json"));
             }
             return new Location() { Name = "Location not Loaded" };
         }

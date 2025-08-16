@@ -4,19 +4,19 @@
   "Name_Enclosed": "\u003C 1 \u003E",
   "Name_Icon": "1 \uD83D\uDC64",
   "address": "127.0.0.1:4292",
-  "connection_count": 20,
-  "message_count": 3,
+  "connection_count": 32,
+  "message_count": 7,
   "class": "Soldier",
   "Class_Icon": "Soldier \uD83E\uDEAA",
   "level": 115,
   "Level_Icon": "115 \uD83C\uDF96\uFE0F",
-  "xp": 6500,
-  "Xp_Icon": "6500 \u2B50",
+  "xp": 8474,
+  "Xp_Icon": "8474 \u2B50",
   "max_hp": 100,
   "Hp": 100,
   "Hp_Icon": "100 \u2764\uFE0F",
-  "Credits": 703,
-  "Credits_Icon": "703 \uD83D\uDCC0",
+  "Credits": 1094,
+  "Credits_Icon": "1094 \uD83D\uDCC0",
   "Credits_Icon_Only": "\uD83D\uDCC0",
   "speed": 229,
   "Speed_Icon": "229 \u26A1",
@@ -246,11 +246,833 @@
       "icon": "\uD83D\uDCE1",
       "description": "Increases your LUCK by 10% in a Fight",
       "value": 10
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Drink",
+      "icon": "\uD83E\uDDC3",
+      "description": "Tasty Drink that restores some health.",
+      "value": 2
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
+    },
+    {
+      "name": "Bandage",
+      "icon": "\uD83E\uDE79",
+      "description": "Restores some health.",
+      "value": 1
     }
   ],
   "current_location": "Landing-Bay",
   "active_quest": {
-    "name": "Drone-Slaughter",
+    "name": "D-Slaughter",
     "level": 2,
     "description": "You need to kill 9 Rouge Drones and their Mother Drone",
     "xp_reward": 24,
@@ -792,6 +1614,7 @@
   "completed_quests": [
     "Introduction",
     "Drone-Slaughter",
-    "No Quest"
+    "No Quest",
+    "D-Slaughter"
   ]
 }

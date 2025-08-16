@@ -1,10 +1,10 @@
 {
   "isDead": false,
-  "name": "!!",
-  "Name_Enclosed": "\u003C !! \u003E",
-  "Name_Icon": "!! \uD83D\uDC64",
-  "address": "127.0.0.1:3178",
-  "connection_count": 1,
+  "name": "T",
+  "Name_Enclosed": "\u003C T \u003E",
+  "Name_Icon": "T \uD83D\uDC64",
+  "address": "127.0.0.1:3971",
+  "connection_count": 2,
   "message_count": 0,
   "class": "Soldier",
   "Class_Icon": "Soldier \uD83E\uDEAA",
@@ -44,7 +44,7 @@
       "value": 2
     }
   ],
-  "current_location": "Cryo-Station",
+  "current_location": "Landing-Bay",
   "active_quest": {
     "name": "No Quest",
     "level": 1,

@@ -4,19 +4,19 @@
   "Name_Enclosed": "\u003C Admin1 \u003E",
   "Name_Icon": "Admin1 \uD83D\uDC64",
   "address": "127.0.0.1:6678",
-  "connection_count": 2,
+  "connection_count": 3,
   "message_count": 0,
   "class": "Soldier",
   "Class_Icon": "Soldier \uD83E\uDEAA",
   "level": 1,
   "Level_Icon": "1 \uD83C\uDF96\uFE0F",
-  "xp": 82,
-  "Xp_Icon": "82 \u2B50",
+  "xp": 92,
+  "Xp_Icon": "92 \u2B50",
   "max_hp": 100,
   "Hp": 100,
   "Hp_Icon": "100 \u2764\uFE0F",
-  "Credits": 4,
-  "Credits_Icon": "4 \uD83D\uDCC0",
+  "Credits": 5,
+  "Credits_Icon": "5 \uD83D\uDCC0",
   "Credits_Icon_Only": "\uD83D\uDCC0",
   "speed": 15,
   "Speed_Icon": "15 \u26A1",
@@ -70,7 +70,7 @@
         "text": "You have no Quest"
       }
     ],
-    "currentStageIndex": 0
+    "currentStageIndex": 1
   },
   "completed_quests": [
     "Introduction"

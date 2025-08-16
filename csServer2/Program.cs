@@ -263,6 +263,7 @@ namespace SocketServer
                                     if (user.Level >= q.Prerequisite_lvl && user.Intellect >= q.Prerequisite_int)
                                     {
                                         user.ActiveQuest = q;
+                                        User.SaveToJsonFile(user);
                                         SendMessage(client, "You accepted the " + user.ActiveQuest.Name + " Quest");
                                     }
                                     else
@@ -674,7 +675,7 @@ namespace SocketServer
         }
         public static void LoadWorld()
         {
-            string[] folders = Directory.GetDirectories("locations");
+            string[] folders = Directory.GetDirectories("world");
             foreach (string folder in folders)
             {
                 string name = Path.GetFileName(folder);

@@ -42,7 +42,9 @@
     - Quest generator
     - Location Generator
     - reload Quests from Json file at request
-    - fight Local Enemies 
+    - fight Local Enemies
+    - implement new itemDB compatible with WorldEditor
+    - test new custom World
 
 ## Attributes
 - Speed:        decides who strikes first, is the "attack value"

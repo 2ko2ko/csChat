@@ -35,18 +35,11 @@ namespace SocketServer
 
         public Quest Clone()
         {
-            return new Quest
-            {
-                Name = Name,
-                Level = Level,
-                Description = Description,
-                XP_reward = XP_reward,
-                Credit_reward = Credit_reward,
-                Prerequisite_lvl = Prerequisite_lvl,
-                Prerequisite_int = Prerequisite_int,
-                Steps = Steps,
-                CurrentStepIndex = 0
-            };
+            // Deep-clone via JSON serialization to ensure Steps, Enemies and nested objects are copied.
+            var json = JsonSerializer.Serialize(this);
+            var copy = JsonSerializer.Deserialize<Quest>(json);
+            if (copy != null) copy.CurrentStepIndex = 0;
+            return copy ?? new Quest().DefaultQuest();
         }
 
         public Quest DefaultQuest()
@@ -102,7 +95,7 @@ namespace SocketServer
 
         public static void CreateJsonFile(string location, Quest quest)
         {
-            if (File.Exists("locations/" + location + "/quests/" + quest.Name + ".json"))
+            if (File.Exists("world/" + location + "/quests/" + quest.Name + ".json"))
             {
                 return;
             }
@@ -115,8 +108,8 @@ namespace SocketServer
             // Serialize the user object to json format using the options
             string json = JsonSerializer.Serialize(quest, options);
             // Write the json string to a file with the username as the file name
-            Directory.CreateDirectory("locations/" + location + "/quests");
-            File.WriteAllText("locations/" + location + "/quests/" + quest.Name + ".json", json);
+            Directory.CreateDirectory("world/" + location + "/quests");
+            File.WriteAllText("world/" + location + "/quests/" + quest.Name + ".json", json);
         }
         public void SaveToJsonFile(string location, Quest quest)
         {
@@ -129,21 +122,21 @@ namespace SocketServer
             // Serialize the user object to json format using the options
             string json = JsonSerializer.Serialize(quest, options);
             // Write the json string to a file with the username as the file name
-            Directory.CreateDirectory("locations/" + location + "/quests");
-            File.WriteAllText("locations/" + location + "/quests/" + quest.Name + ".json", json);
+            Directory.CreateDirectory("world/" + location + "/quests");
+            File.WriteAllText("world/" + location + "/quests/" + quest.Name + ".json", json);
         }
         public Quest LoadFromJsonFile(string location, string name)
         {
-            if (File.Exists("locations/" + location + "/quests/" + name + ".json"))
+            if (File.Exists("world/" + location + "/quests/" + name + ".json"))
             {
-                return JsonSerializer.Deserialize<Quest>(File.ReadAllText("locations/" + location + "/quests/" + name + ".json"));
+                return JsonSerializer.Deserialize<Quest>(File.ReadAllText("world/" + location + "/quests/" + name + ".json"));
             }
             return new Quest() { Name = "Quest not loaded" };
         }
         public static List<Quest> LoadAllFromFolder(string location)
         {
             List<Quest> ql = new List<Quest>();
-            string[] files = Directory.GetFiles("locations/" + location + "/quests");
+            string[] files = Directory.GetFiles("world/" + location + "/quests");
             foreach (string file in files)
             {
                 string jsonFile = Path.GetFileName(file);

@@ -73,12 +73,12 @@ namespace QuestEditor
             loc.SaveToJsonFile(loc);
             q.SaveToJsonFile("Landing-Bay", q);
 
-            // replace locations dir in csServer2
-            if (Directory.Exists("../csServer2/locations"))
+            // replace world dir in csServer2
+            if (Directory.Exists("../csServer2/world"))
             {
-                Directory.Delete("../csServer2/locations", true);
+                Directory.Delete("../csServer2/world", true);
             }
-            Directory.Move("locations", "../csServer2/locations");
+            Directory.Move("world", "../csServer2/world");
         }
     }
 }
