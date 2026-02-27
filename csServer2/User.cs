@@ -553,7 +553,7 @@ namespace SocketServer
 
             foreach (string file in fileNames)
             {
-                User u = Program.FindOnlineUser(Program.onlineUserList, file);
+                User u = Program.FindOnlineUser(file);
                 if (u == null)
                 {
                     Console.WriteLine("🩹 healing " + file);
@@ -567,7 +567,7 @@ namespace SocketServer
         {
             if (!string.IsNullOrEmpty(CurrentLocation))
             {
-                Location oldLoc = Program.FindLocation(world, CurrentLocation);
+                Location oldLoc = Program.FindLocation(CurrentLocation);
                 try
                 {
                     oldLoc.Visitors.Remove(this); // remove user from old location visitors
@@ -578,7 +578,7 @@ namespace SocketServer
                 }
                 //oldLoc.Visitors.Remove(this);
             }
-            Location loc = Program.FindLocation(world, locationName);
+            Location loc = Program.FindLocation(locationName);
             loc.Visitors.Add(this);   // add user to location visitors
             CurrentLocation = locationName;
             Program.SendMessage(client, $"You arrive at {locationName} \n \n  << " + loc.WelcomeMessage + " >> ");
@@ -587,7 +587,7 @@ namespace SocketServer
         }
         public void BuyItem(TcpClient client, string itemName, List<Location> world)
         {
-            List<Item> shop = Program.FindLocation(world, CurrentLocation).Shop;
+            List<Item> shop = Program.FindLocation(CurrentLocation).Shop;
             if (!string.IsNullOrEmpty(itemName) && shop.Contains(Location.FindItemInShop(shop, itemName)))
             {
                 Item i = Location.FindItemInShop(shop, itemName);
@@ -605,7 +605,7 @@ namespace SocketServer
         }
         public void BuyItem(TcpClient client, string itemName, List<Location> world, int amount)
         {
-            List<Item> shop = Program.FindLocation(world, CurrentLocation).Shop;
+            List<Item> shop = Program.FindLocation(CurrentLocation).Shop;
             if (!string.IsNullOrEmpty(itemName) && shop.Contains(Location.FindItemInShop(shop, itemName)))
             {
                 Item item = Location.FindItemInShop(shop, itemName);

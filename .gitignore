@@ -22,4 +22,8 @@ QuestEditor/obj*
 WorldEditor/obj*
 csServer2/world*
 csServer2/users
-
+csClient/.vscode*
+csServer/.vscode*
+csServer2/.vscode*
+QuestEditor/.vscode*
+WorldEditor/.vscode*
