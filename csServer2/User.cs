@@ -543,7 +543,7 @@ namespace SocketServer
         public static void HealOfflineUsers(object state)
         {
             Directory.CreateDirectory("users");
-            string[] filePaths = Directory.GetFiles(@"users\", "*.json");
+            string[] filePaths = Directory.GetFiles(@"users", "*.json");
             string[] fileNames = new string[filePaths.Length];
 
             for (int i = 0; i < filePaths.Length; i++)

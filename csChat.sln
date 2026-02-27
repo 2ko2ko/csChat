@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "csServer2", "csServer2\csSe
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuestEditor", "QuestEditor\QuestEditor.csproj", "{19C5C29F-8A19-473C-A0B7-74479DDE14C8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WorldEditor", "WorldEditor\QuestEditor.csproj", "{138e95f2-9700-4523-83f6-feeb96b72cab}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
