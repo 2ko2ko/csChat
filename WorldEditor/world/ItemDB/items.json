@@ -70,5 +70,11 @@
     "icon": "44",
     "description": "4",
     "value": 4
+  },
+  {
+    "name": "Broken Robotic Arm",
+    "icon": "??",
+    "description": "A broken arm from a Robotic Guardian",
+    "value": 30
   }
 ]

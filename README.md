@@ -45,6 +45,7 @@
     - fight Local Enemies
     - implement new itemDB compatible with WorldEditor
     - test new custom World
+    - add quest items
 
 ## Attributes
 - Speed:        decides who strikes first, is the "attack value"

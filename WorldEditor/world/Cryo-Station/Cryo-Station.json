@@ -185,13 +185,13 @@
       "currentStageIndex": 0
     },
     {
-      "name": "Landing-Bay-Journey",
+      "name": "Reach the Landing-Bay",
       "level": 2,
       "description": "Fight your way through Rouge-Drones and reach the Landing-Bay",
       "xp_reward": 1000,
       "credit_reward": 1000,
       "prerequisite_LVL": 2,
-      "prerequisite_INT": 10,
+      "prerequisite_INT": 2,
       "steps": [
         {
           "text": "You find a map and see that there is a possible way to reach the so called Landing-Bay"

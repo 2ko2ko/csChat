@@ -183,57 +183,6 @@
         }
       ],
       "currentStageIndex": 0
-    },
-    {
-      "name": "Landing-Bay-Journey",
-      "level": 2,
-      "description": "Fight your way through Rouge-Drones and reach the Landing-Bay",
-      "xp_reward": 1000,
-      "credit_reward": 1000,
-      "prerequisite_LVL": 2,
-      "prerequisite_INT": 10,
-      "steps": [
-        {
-          "text": "You find a map and see that there is a possible way to reach the so called Landing-Bay"
-        },
-        {
-          "text": "While squeezing through a vent you hear a loud buzzing, it seems 2 Rouge Drones have spotted you."
-        },
-        {
-          "enemies": [
-            {
-              "name": "Rouge Drone",
-              "Level": 2,
-              "hp": 100,
-              "speed": 7,
-              "int": 7,
-              "luck": 10,
-              "credits": 20,
-              "loot": []
-            },
-            {
-              "name": "Rouge Drone",
-              "Level": 2,
-              "hp": 100,
-              "speed": 7,
-              "int": 10,
-              "luck": 20,
-              "credits": 20,
-              "loot": []
-            }
-          ]
-        },
-        {
-          "text": "You managed to destroy the Drones, but you still have a long way to the Landing-Bay"
-        },
-        {
-          "text": "After navigating the desolate enviroment and getting lost 2 times, you finally reach your goal"
-        },
-        {
-          "moveTo": "Landing-Bay"
-        }
-      ],
-      "currentStageIndex": 0
     }
   ],
   "enemies": [
@@ -244,8 +193,7 @@
       "speed": 7,
       "int": 7,
       "luck": 10,
-      "credits": 2,
-      "loot": []
+      "credits": 2
     },
     {
       "name": "Rouge Drone Mother",
@@ -254,8 +202,7 @@
       "speed": 27,
       "int": 27,
       "luck": 10,
-      "credits": 22,
-      "loot": []
+      "credits": 22
     }
   ],
   "shop": [

@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "u8Ww1xxequ9Z9nOiA1O86TU0i8X6ch1Zwamjt1bHIojp8xMV4pEMVn/p3llKwW/UIKQtdplxa2qgBoRj8uHx9w==",
+  "dgSpecHash": "F5YwA/3rlo8=",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\Documents\\csChat\\csServer\\csServer.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\7.0.20\\microsoft.netcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\7.0.20\\microsoft.windowsdesktop.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\7.0.20\\microsoft.aspnetcore.app.ref.7.0.20.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\7.0.20\\microsoft.netcore.app.host.win-x64.7.0.20.nupkg.sha512"
+  ],
   "logs": []
 }
