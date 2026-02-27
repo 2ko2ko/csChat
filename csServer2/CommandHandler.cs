@@ -1,0 +1,532 @@
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Net.Sockets;
+using System.Text;
+
+//Dictionary Lookup for Client Commands
+
+namespace SocketServer
+{
+    public static class CommandHandler
+    {
+        public delegate void CommandDelegate(TcpClient client, User user, string command, string[] args);
+
+        public static Dictionary<string, CommandDelegate> Commands = new Dictionary<string, CommandDelegate>(StringComparer.OrdinalIgnoreCase);
+
+        // Command Dict
+        static CommandHandler()
+        {
+            Commands["help"] = Help;
+            Commands["h"] = Help;
+
+            Commands["users"] = Users;
+            Commands["u"] = Users;
+
+            Commands["look"] = Look;
+            Commands["la"] = Look;
+
+            Commands["locals"] = Locals;
+            Commands["l"] = Locals;
+
+            Commands["move"] = Move;
+            Commands["m"] = Move;
+
+            Commands["quest"] = Quest;
+            Commands["q"] = Quest;
+            Commands["qg"] = Quest;
+            Commands["qc"] = Quest;
+            Commands["qa"] = Quest;
+
+            Commands["shop"] = Shop;
+
+            Commands["revive"] = Revive;
+
+            Commands["use"] = UseItem;
+
+            Commands["i"] = Inventory;
+            Commands["inventory"] = Inventory;
+            Commands["ir"] = Inventory;
+            Commands["ii"] = Inventory;
+            Commands["is"] = Inventory;
+            Commands["isa"] = Inventory;
+
+            Commands["class"] = Class;
+
+            Commands["duel"] = Duel;
+            Commands["d"] = Duel;
+
+            Commands["fight"] = Fight;
+            Commands["f"] = Fight;
+
+            Commands["allocate_attributes"] = AllocateAttributes;
+            Commands["aa"] = AllocateAttributes;
+
+            Commands["attributes"] = Attributes;
+            Commands["a"] = Attributes;
+        }
+
+        //Command Functions
+
+        private static void Help(TcpClient client, User user, string cmd, string[] args)
+        {
+            string help = "Available commands:\n" +
+                "!class [class_name] - Sets the user's class to [class_name], which must be one of: Soldier, Engineer, Explorer\n" +
+                "!quest - Advance in you active quest\n" +
+                "!quest completed - Shows all quest you completed\n" +
+                "!quest abandon - Abandon your active quest\n!q" +
+                "!qg [Questname] - (!quest get [Questname]) - Display/Accept a local Quest\n" +
+                "!inventory - Displays your Inventory\n" +
+                "!use [item name] - Use item from your inventory\n" +
+                "!i [item name] - Use item from your inventory\n" +
+                "!i [item name] [amount] - Use [amount] of [item name] from your inventory\n" +
+                "!ir [item name] - Remove item from your inventory\n" +
+                "!ii [item name] - Inspect item in your inventory\n" +
+                "!is [item name] - Sell item from your inventory\n" +
+                "!isa [item name] - Sell all [item name] from your inventory\n" +
+                "!shop - Displays the local shop if there is one \n" +
+                "!shop [item name] - Buy [Item name] from the Shop \n" +
+                "!shop [item name] [amount]- Buy [amount] of [Item name] from the Shop \n" +
+                "!move [location name] - move to [location name] \n" +
+                "!look around - Reveals info about your current location \n" +
+                "!revive - Revives you for a price\n" +
+                "!fight [enemy_level] - Initiates a battle with an enemy of the specified level\n" +
+                "!duel [username] - Initiates a battle with another User if he/she is online\n" +
+                "!allocate_attributes [speed] [intellect] [luck] - Increases the user's speed, intellect, and luck attributes by the specified amounts\n" +
+                "!attributes - Displays the user's current attributes\n" +
+                "!users - Displays a list of all connected users\n" +
+                "!locals - Displays a list of all users in current location\n" +
+                "![username] [message] - Send a private message to a user  \n";
+            Program.SendMessage(client, help);
+        }
+
+        private static void Users(TcpClient client, User user, string cmd, string[] args)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            // foreach (string name in clients.Values)
+            // {
+            //     sb.Append(name);
+            //     sb.Append(", ");
+            // }
+            // string userlist = sb.ToString().TrimEnd();
+            // userlist.TrimEnd();
+
+            foreach (User u in Program.onlineUserList)
+            {
+                sb.Append("< " + u.Name + " > Level: " + u.Level + " hp: " + u.Hp + " \n");
+            }
+
+            string userlist = sb.ToString();
+
+            Program.SendMessage(client, sb.ToString());
+        }
+
+        private static void Look(TcpClient client, User user, string cmd, string[] args)
+        {
+            Location loc = Program.FindLocation(user.CurrentLocation);
+            if (loc != null)
+            {
+                Program.SendMessage(client, $"You are in {user.CurrentLocation} | {loc.Description}");
+            }
+            else
+            {
+                Program.SendMessage(client, "You are in nowhere. The sound of Nigh̶̑ẗ̸m̴͝a̸͒res surrounds you.");
+            }
+        }
+
+        private static void Locals(TcpClient client, User user, string cmd, string[] args)
+        {
+            //StringBuilder sb = new StringBuilder();
+            Location loc = Program.FindLocation(user.CurrentLocation);
+            if (loc == null)
+            {
+                Program.SendMessage(client, $"You are currently in nowhere | The sound of Nigh̶̑ẗ̸m̴͝a̸͒res surrounds you. ");
+                return;
+            }
+
+            StringBuilder sb = new StringBuilder();
+            foreach (User u in loc.Visitors)
+            {
+                sb.Append("< " + u.Name + " > LVL: " + u.Level + " || HP: " + u.Hp + " \n");
+            }
+
+            string locals = sb.ToString();
+
+            Program.SendMessage(client, locals);
+        }
+
+        private static void Move(TcpClient client, User user, string cmd, string[] args)
+        {
+            /*string[] parts = message.Split(' ', 2);
+            if (parts.Length > 1)
+            {
+                string locationName = message.Split()[1];*/
+            //idgi
+
+            if (args.Length == 0)
+            {
+                return;
+            }
+
+            string locationName = string.Join(" ", args);
+            if (Program.FindLocation(locationName) != null)
+            {
+                user.Move(client, locationName, Program.world);
+            }
+            else
+            {
+                Program.SendMessage(client, "Input a valid Location  ");
+            }
+        }
+
+        // QUEST START
+        private static void Quest(TcpClient client, User user, string cmd, string[] args)
+        {
+            string action = cmd.ToLower();
+            if (action == "quest" || action == "q")
+            {
+                if (args.Length == 0)
+                {
+                    if (user.ActiveQuest == null)
+                    {
+                        Quest q = new Quest().Introduction();
+                        user.ActiveQuest = q;
+                        new QuestManager().StartQuest(q, client, user);
+                    }
+                    else
+                    {
+                        new QuestManager().AdvanceQuestStep(client, user, false);
+                    }
+                    return;
+                }
+
+                action = args[0].ToLower();
+                args = args.Skip(1).ToArray();
+            }
+
+            // Quest substrings/args
+            switch (action)
+            {
+            case "get":
+            case "qg":
+                HandleQuestGet(client, user, args);
+            break;
+
+            case "completed":
+            case "qc":
+                HandleQuestCompleted(client, user);
+            break;
+
+            case "abandon":
+            case "qa":
+                HandleQuestAbandon(client, user);
+            break;
+
+            default:
+            Program.SendMessage(client, $"Unknown quest command. Use: !quest [get|completed|abandon] or !qg/!qc/!qa.");
+            break;
+            }   
+        }
+
+        // quest get
+        private static void HandleQuestGet(TcpClient client, User user, string[] args)
+        {
+            Location loc = Program.FindLocation(user.CurrentLocation);
+            if (loc == null)
+            {
+                Program.SendMessage(client, $"You are currently in nowhere | The sound of Nigh̶̑ẗ̸m̴͝a̸͒res surrounds you. ");
+                return;
+            }
+
+            if (args.Length == 0)
+            {
+                foreach (Quest q in loc.Quests)
+                    if (user.Intellect >= q.Prerequisite_int) // user only sees quests if Intellect is high enough
+                    {
+                        Program.SendMessage(client, " <" + q.Name + "> " + q.Description + " | LVL: " + q.Level + " | XP: " + q.XP_reward);
+                    }
+                return;
+            }
+
+            string qName = string.Join(" ", args);
+            Quest quest = Location.FindQuestInLocation(loc.Quests, qName);
+            if (quest == null)
+            {
+                Program.SendMessage(client, "There is no Quest with that name here");
+                return;
+            }
+
+            if (user.Level >= quest.Prerequisite_lvl && user.Intellect >= quest.Prerequisite_int)
+            {
+                user.ActiveQuest = quest;
+                User.SaveToJsonFile(user);
+                Program.SendMessage(client, "You accepted the " + user.ActiveQuest.Name + " Quest");
+            }
+            else
+            {
+                Program.SendMessage(client, "Your level or intellect is too low for this Quest  ");
+            }
+        }
+
+        // wuest completed
+        private static void HandleQuestCompleted(TcpClient client, User user)
+        {
+            Program.SendMessage(client, "Quests you completed: ");
+            foreach (string s in user.completedQuests)
+            {
+                Program.SendMessage(client, " " + s);
+            }
+        }
+
+        // quest abandon
+        private static void HandleQuestAbandon(TcpClient client, User user)
+        {
+            if (user.ActiveQuest != null)
+            {
+                Program.SendMessage(client, Environment.NewLine + "You abandoned your active quest:" + user.ActiveQuest.Name);
+                user.ActiveQuest = new Quest().DefaultQuest();
+            }
+            else
+            {
+                Program.SendMessage(client, Environment.NewLine + "You have no active quest.");
+            }
+        }
+        //QUEST END
+
+        private static void Shop(TcpClient client, User user, string cmd, string[] args)
+        {
+            // Check if shop
+            Location loc = Program.FindLocation(user.CurrentLocation);
+            if (loc?.Shop == null || loc.Shop.Count == 0)
+            {
+                Program.SendMessage(client, "There is no shop around gere ");
+                return;
+            }
+
+            if (args.Length == 0)
+            {
+                // display shop items
+                StringBuilder sb = new StringBuilder();
+                foreach (Item i in loc.Shop)
+                {
+                    sb.Append(i.Icon + "-" + i.Name + " | " + i.Value + "📀  \n");
+                }
+                Program.SendMessage(client, sb.ToString());
+                return;
+            }
+
+            // Buy
+            if (args.Length == 1)
+            {
+                user.BuyItem(client, args[0], Program.world);
+            }
+            // Buy Multiple
+            else if (args.Length >= 2 && int.TryParse(args[1], out int amount))
+            {
+                user.BuyItem(client, args[0], Program.world, amount);
+            }
+            else
+            {
+                Program.SendMessage(client, "Invalid shop command. Usage: !shop [item] [amount]");
+            }
+        }
+
+        private static void Revive(TcpClient client, User user, string cmd, string[] args)
+        {
+            if (user.Hp == 0)
+            {
+                user.HealUser(client, 100, false);
+                user.Credits -= user.Credits / 4;
+                Program.SendMessage(client, $"You revived for {user.Credits / 4}📀 and now have {user.Hp} HP ");
+            }
+            else
+            {
+                Program.SendMessage(client, "You can only revive when DEAD ");
+            }
+        }
+
+        private static void UseItem(TcpClient client, User user, string cmd, string[] args)
+        {
+            if (user.IsDead)
+            {
+                Program.SendMessage(client, "You cannot use your inventory while dead  ");
+                return;
+            }
+
+            if (args.Length == 0)
+            {
+                Program.SendMessage(client, "Input a valid amount, for example: !i Drink 3");
+                return;
+            }
+
+            string itemName = args[0];
+            Item item = user.FindItemInInventory(itemName);
+            int amount = 1;
+            if (args.Length > 1 && int.TryParse(args[1], out amount)) //<- retarded
+            {
+                //LOL
+            }
+            if (item != null)
+                    Item.UseItem(client, user, item, true, amount);
+                else
+                    Program.SendMessage(client, "Item " + itemName + " not found.");
+        }
+
+        private static void Inventory(TcpClient client, User user, string cmd, string[] args)
+        {
+            // <- 
+            switch (cmd.ToLower())
+            {
+                case "inventory":
+                case "i" when args.Length == 0:
+                    // Show full inventory list
+                    StringBuilder sb = new StringBuilder();
+                    foreach (Item i in user.Inventory)
+                        sb.Append($"{i.Icon}-{i.Name}, ");
+                    Program.SendMessage(client, sb.ToString().TrimEnd(',', ' '));
+                    break;
+
+                case "ir":
+                    // Remove item
+                    if (args.Length == 0)
+                        Program.SendMessage(client, "Usage: !ir [item]");
+                    else
+                    {
+                        string itemName = string.Join(" ", args);
+                        Item item = user.FindItemInInventory(itemName);
+                        if (item != null)
+                            user.RemoveItemFromInventory(client, item);
+                        else
+                            Program.SendMessage(client, $"Item '{itemName}' not found in inventory.");
+                    }
+                    break;
+
+                case "ii":
+                    if (args.Length == 0)
+                        Program.SendMessage(client, "Usage: !ii [item]");
+                    else
+                        user.InspectItem(client, string.Join(" ", args));
+                    break;
+
+                case "is":
+                    if (args.Length == 0)
+                        Program.SendMessage(client, "Usage: !is [item]");
+                    else
+                        user.SellItem(client, string.Join(" ", args), true);
+                    break;
+
+                case "isa":
+                    if (args.Length == 0)
+                        Program.SendMessage(client, "Usage: !isa [item]");
+                    else
+                        user.SellAllofItem(client, string.Join(" ", args));
+                    break;
+
+                default:
+                    if (user.IsDead)
+                    {
+                        Program.SendMessage(client, "You cannot use your inventory while dead.");
+                        return;
+                    }
+
+                    string itemNameUse = string.Join(" ", args);
+                    int amount = 1;
+                    if (args.Length > 1 && int.TryParse(args.Last(), out int parsed))
+                    {
+                        amount = parsed;
+                        itemNameUse = string.Join(" ", args.Take(args.Length - 1));
+                    }
+
+                    Item useItem = user.FindItemInInventory(itemNameUse);
+                    if (useItem != null)
+                        Item.UseItem(client, user, useItem, true, amount);
+                    else
+                        Program.SendMessage(client, $"Item '{itemNameUse}' not found.");
+                    break;
+            }
+        }
+
+        private static void Class(TcpClient client, User user, string cmd, string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Program.SendMessage(client, "Usage: !class [Soldier|Engineer|Explorer]");
+                return;
+            }
+
+            string className = args[0].ToLower();
+            if (className == "soldier") user.ChangeTo_Soldier();
+            else if (className == "engineer") user.ChangeTo_Engineer();
+            else if (className == "explorer") user.ChangeTo_Explorer();
+            else
+            {
+                Program.SendMessage(client, "Invalid class. Valid classes are Soldier, Engineer and Explorer.");
+                return;
+            }
+
+            Program.SendMessage(client, $"You are now a {className}!");
+            User.SaveToJsonFile(user);
+        }
+
+        private static void Duel(TcpClient client, User user, string cmd, string[] args)
+        {
+            if (args.Length == 0)
+            {
+                Program.SendMessage(client, "Usage: !duel [username]");
+                return;
+            }
+
+            string opponentName = args[0];
+            User opponent = Program.FindOnlineUser(opponentName);
+            if (opponent != null)
+                User.Fight(client, user, opponent);
+            else
+                Program.SendMessage(client, "That user is not online.");
+        }
+
+        private static void Fight(TcpClient client, User user, string cmd, string[] args)
+        {
+            Enemy enemy;
+            if (args.Length > 0 && int.TryParse(args[0], out int level))
+            {
+                enemy = new Enemy("", 1).RougeDrone(level);
+            }
+            else
+            {
+                Location loc = Program.FindLocation(user.CurrentLocation);
+                if (loc?.Enemies == null || loc.Enemies.Count == 0)
+                {
+                    Program.SendMessage(client, "No enemies here.");
+                    return;
+                }
+                enemy = loc.Enemies[0].Clone();
+                enemy = Enemy.RandomizeStats(enemy, false, true);
+            }
+
+            Program.SendMessage(client, "Your Opponent:");
+            Game.DisplayProfile(client, enemy.userObj);
+            User.Fight(client, user, enemy.userObj);
+        }
+
+        private static void AllocateAttributes(TcpClient client, User user, string cmd, string[] args)
+        {
+            if (args.Length < 3 ||
+                !int.TryParse(args[0], out int speed) ||
+                !int.TryParse(args[1], out int intellect) ||
+                !int.TryParse(args[2], out int luck))
+            {
+                Program.SendMessage(client, "Usage: !allocate_attributes [speed] [intellect] [luck]");
+                return;
+            }
+
+            Game.AllocateAP(client, user, speed, intellect, luck);
+        }
+
+        private static void Attributes(TcpClient client, User user, string cmd, string[] args)
+        {
+            Game.DisplayProfile(client, user);
+        }
+    }
+}
