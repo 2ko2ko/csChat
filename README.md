@@ -48,6 +48,8 @@
     - add quest items
     - add a location selection feature to the "move" command in the world editor when editing or creating a quest, right now you have to manually type the location name
     - level up mechanic missing when completing a quest
+    - Create "Server Manager" project that allows to create, edit, and delete users
+    - Add the feature to blacklist and disconnect users to the "server2" project
 
 ## Attributes
 - Speed:        decides who strikes first, is the "attack value".

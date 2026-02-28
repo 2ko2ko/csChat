@@ -95,11 +95,6 @@ namespace SocketServer
             return new Quest().DefaultQuest();
         }
 
-
-
-
-
-
         // to be changed or deleted
         public static void CreateJsonFile(string location, Quest quest)
         {
