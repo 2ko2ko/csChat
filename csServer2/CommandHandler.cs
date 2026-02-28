@@ -193,7 +193,7 @@ namespace SocketServer
                     {
                         Quest q = new Quest().Introduction();
                         user.ActiveQuest = q;
-                        new QuestManager().StartQuest(q, client, user);
+                        new QuestManager().StartIntroQuest(q, client, user);
                     }
                     else
                     {
@@ -209,25 +209,25 @@ namespace SocketServer
             // Quest substrings/args
             switch (action)
             {
-            case "get":
-            case "qg":
-                HandleQuestGet(client, user, args);
-            break;
+                case "get":
+                case "qg":
+                    HandleQuestGet(client, user, args);
+                    break;
 
-            case "completed":
-            case "qc":
-                HandleQuestCompleted(client, user);
-            break;
+                case "completed":
+                case "qc":
+                    HandleQuestCompleted(client, user);
+                    break;
 
-            case "abandon":
-            case "qa":
-                HandleQuestAbandon(client, user);
-            break;
+                case "abandon":
+                case "qa":
+                    HandleQuestAbandon(client, user);
+                    break;
 
-            default:
-            Program.SendMessage(client, $"Unknown quest command. Use: !quest [get|completed|abandon] or !qg/!qc/!qa.");
-            break;
-            }   
+                default:
+                    Program.SendMessage(client, $"Unknown quest command. Use: !quest [get|completed|abandon] or !qg/!qc/!qa.");
+                    break;
+            }
         }
 
         // quest get
@@ -369,9 +369,9 @@ namespace SocketServer
                 //LOL
             }
             if (item != null)
-                    Item.UseItem(client, user, item, true, amount);
-                else
-                    Program.SendMessage(client, "Item " + itemName + " not found.");
+                Item.UseItem(client, user, item, true, amount);
+            else
+                Program.SendMessage(client, "Item " + itemName + " not found.");
         }
 
         private static void Inventory(TcpClient client, User user, string cmd, string[] args)

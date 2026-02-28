@@ -36,7 +36,7 @@
 
 
 ## Problems
-    - First created User does not heal
+    - 
 
 ## To-Do
     - Quest generator
@@ -46,7 +46,8 @@
     - implement new itemDB compatible with WorldEditor
     - test new custom World
     - add quest items
-    - add introduction quest creation feature to world editor and replace the hardcoded introduction quest
+    - add a location selection feature to the "move" command in the world editor when editing or creating a quest, right now you have to manually type the location name
+    - level up mechanic missing when completing a quest
 
 ## Attributes
 - Speed:        decides who strikes first, is the "attack value".

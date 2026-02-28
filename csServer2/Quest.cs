@@ -65,26 +65,34 @@ namespace SocketServer
         }
         public Quest Introduction()
         {
-            Name = "Introduction";
-            Level = 1;
-            XP_reward = 12;
-            Prerequisite_lvl = 1;
-            Prerequisite_int = 1;
-            Description = "The first Quest";
-            Steps = new List<QuestStep>()
+            // Name = "Introduction";
+            // Level = 1;
+            // XP_reward = 12;
+            // Prerequisite_lvl = 1;
+            // Prerequisite_int = 1;
+            // Description = "The first Quest";
+            // Steps = new List<QuestStep>()
+            // {
+            //     new QuestStep() { Text = "You wake up from a long Sleep and find yourself in a Cryo-Pod." },
+            //     new QuestStep() { Text = "You remember that you are on a Colony Ship that is supposed to colonize a Planet called MATIO." },
+            //     new QuestStep() { Text = "You realize that while asleep, your Body has been tamperd with and modified \nyou can move faster than you remember, and a lot more precise." },
+            //     new QuestStep() { Text = "You notice Instructions on the Wall: \n1) Take tools from the Locker \n2) Grab a Speed-Suit from the wardrobe \n3) Head to the Control Room and activate the Fabricator" },
+            //     new QuestStep() { Text = "You open the locker and find a DATA-DAGGER, you take it, grab the Speed-Suit, and head to the Control room via an elevator." },
+            //     new QuestStep() { Text = "As the elevator door opens you see a Worker-Drone, it turn hostile the moment it sees you." },
+            //     new QuestStep() { Text = "You grab your D-D and charge to attack.", Enemies = new List<Enemy>(){ new Enemy("placeholder",1).RougeDroneStatic(1) } },
+            //     new QuestStep() { Text = "You manage to kill the Drone by stabbing it really fast, the drone hit you a couple of times too and damaged your Suit and Body " },
+            //     new QuestStep() { Items = new List<Item>(){ new Item().Drink()} },
+            //     new QuestStep() { MoveTo = new Location().CryoStation().Name }
+            // };
+            if (File.Exists("world/intro.json"))
             {
-                new QuestStep() { Text = "You wake up from a long Sleep and find yourself in a Cryo-Pod." },
-                new QuestStep() { Text = "You remember that you are on a Colony Ship that is supposed to colonize a Planet called MATIO." },
-                new QuestStep() { Text = "You realize that while asleep, your Body has been tamperd with and modified \nyou can move faster than you remember, and a lot more precise." },
-                new QuestStep() { Text = "You notice Instructions on the Wall: \n1) Take tools from the Locker \n2) Grab a Speed-Suit from the wardrobe \n3) Head to the Control Room and activate the Fabricator" },
-                new QuestStep() { Text = "You open the locker and find a DATA-DAGGER, you take it, grab the Speed-Suit, and head to the Control room via an elevator." },
-                new QuestStep() { Text = "As the elevator door opens you see a Worker-Drone, it turn hostile the moment it sees you." },
-                new QuestStep() { Text = "You grab your D-D and charge to attack.", Enemies = new List<Enemy>(){ new Enemy("placeholder",1).RougeDroneStatic(1) } },
-                new QuestStep() { Text = "You manage to kill the Drone by stabbing it really fast, the drone hit you a couple of times too and damaged your Suit and Body " },
-                new QuestStep() { Items = new List<Item>(){ new Item().Drink()} },
-                new QuestStep() { MoveTo = new Location().CryoStation().Name }
-            };
-            return this;
+                return LoadFromJsonFile("world/intro.json");
+            }
+            else
+            {
+                Console.WriteLine("Intro Quest not found");
+            }
+            return new Quest().DefaultQuest();
         }
 
 
@@ -92,7 +100,7 @@ namespace SocketServer
 
 
 
-
+        // to be changed or deleted
         public static void CreateJsonFile(string location, Quest quest)
         {
             if (File.Exists("world/" + location + "/quests/" + quest.Name + ".json"))
@@ -111,6 +119,8 @@ namespace SocketServer
             Directory.CreateDirectory("world/" + location + "/quests");
             File.WriteAllText("world/" + location + "/quests/" + quest.Name + ".json", json);
         }
+
+        // to be changed or deleted
         public void SaveToJsonFile(string location, Quest quest)
         {
             // Create a json serializer options object with some settings
@@ -125,6 +135,8 @@ namespace SocketServer
             Directory.CreateDirectory("world/" + location + "/quests");
             File.WriteAllText("world/" + location + "/quests/" + quest.Name + ".json", json);
         }
+
+        // to be changed or deleted
         public Quest LoadFromJsonFile(string location, string name)
         {
             if (File.Exists("world/" + location + "/quests/" + name + ".json"))
@@ -133,6 +145,17 @@ namespace SocketServer
             }
             return new Quest() { Name = "Quest not loaded" };
         }
+
+        public Quest LoadFromJsonFile(string filepath)
+        {
+            if (File.Exists(filepath))
+            {
+                return JsonSerializer.Deserialize<Quest>(File.ReadAllText(filepath));
+            }
+            return new Quest() { Name = "Quest not loaded" };
+        }
+
+        // to be changed or deleted
         public static List<Quest> LoadAllFromFolder(string location)
         {
             List<Quest> ql = new List<Quest>();

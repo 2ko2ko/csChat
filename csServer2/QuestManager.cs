@@ -11,7 +11,7 @@ namespace SocketServer
         //public Quest CurrentQuest { get; set; }
         //public User user { get; set; }
 
-        public void StartQuest(Quest quest, TcpClient client, User user)
+        public void StartIntroQuest(Quest quest, TcpClient client, User user)
         {
             user.ActiveQuest = quest;
             //CurrentQuest = user.ActiveQuest;

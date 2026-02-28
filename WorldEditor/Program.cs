@@ -410,6 +410,13 @@ class Program
         }
         return result;
     }
+    static List<(string display, string path)> IntroFile(string worldDir)
+    {
+        var result = new List<(string, string)>();
+        var introPath = Path.Combine(worldDir, "intro.json");
+        if (File.Exists(introPath)) result.Add(("intro.json", introPath));
+        return result;
+    }
 
     static List<Item> LoadItemDb(string path)
     {
@@ -525,7 +532,7 @@ class Program
         for (; ; )
         {
             Console.WriteLine();
-            Console.WriteLine("Quest editor - commands: list | show | create | edit | remove | back | exit | help");
+            Console.WriteLine("Quest editor - commands: intro | list | show | create | edit | remove | back | exit | help");
             Console.Write("> ");
             var line = Console.ReadLine();
             if (string.IsNullOrWhiteSpace(line)) continue;
@@ -536,6 +543,7 @@ class Program
             if (cmd == "help" || cmd == "?")
             {
                 Console.WriteLine("Quest editor commands:");
+                Console.WriteLine("  intro            - make introduction quest for the world");
                 Console.WriteLine("  list             - list locations that contain world files");
                 Console.WriteLine("  show [loc]       - show quests in a location (omit to pick from list)");
                 Console.WriteLine("  create           - create a new quest inside a chosen location");
@@ -544,6 +552,11 @@ class Program
                 Console.WriteLine("  back             - return to main menu");
                 Console.WriteLine("  exit             - quit the program");
                 continue;
+            }
+
+            if (cmd == "intro")
+            {
+                IntroductionQuestMenu(worldDir);
             }
 
             if (cmd == "list")
@@ -871,7 +884,166 @@ class Program
         }
     }
 
+    static bool IntroductionQuestMenu(string worldDir)
+    {
+        for (; ; )
+        {
+            Console.WriteLine();
+            Console.WriteLine("Introduction Quest editor - commands: create | edit | back | help | ?");
+            Console.Write("> ");
+            var line = Console.ReadLine();
+            if (string.IsNullOrWhiteSpace(line)) continue;
+            var parts = line.Split(' ', 2, StringSplitOptions.RemoveEmptyEntries);
+            var cmd = parts[0].ToLowerInvariant();
+            if (cmd == "back") return false;
+            // if (cmd == "exit") return true;
+            if (cmd == "help" || cmd == "?")
+            {
+                Console.WriteLine("Introduction Quest editor commands:");
+                Console.WriteLine("  create           - create an introduction quest (only one allowed, will overwrite existing intro.json)");
+                Console.WriteLine("  edit             - edit the existing introduction quest (if intro.json exists)");
+                Console.WriteLine("  back             - return to main menu");
+                continue;
+            }
+
+            if (cmd == "create")
+            {
+                var introPath = Path.Combine(worldDir, "intro.json");
+                if (File.Exists(introPath) && !Confirm("intro.json already exists. Overwrite? (y/N): "))
+                {
+                    Console.WriteLine("Creation aborted.");
+                    continue;
+                }
+                var introQuest = new Quest
+                {
+                    name = "Introduction",
+                    description = "This is the introduction quest for the world.",
+                    level = 1,
+                    xp_reward = 0,
+                    credit_reward = 0,
+                    prerequisite_LVL = 1,
+                    prerequisite_INT = 1,
+                    steps = new List<JsonElement>
+                    {
+                        JsonDocument.Parse(JsonSerializer.Serialize(new { text = "Welcome to the world! This is your introduction quest." }, jopts)).RootElement.Clone()
+                    }
+                };
+
+                File.WriteAllText(introPath, JsonSerializer.Serialize(introQuest, jopts));
+                Console.WriteLine("Introduction quest created at: " + introPath);
+                Console.WriteLine("Do you want to edit the introduction quest?" + " (y/N): ");
+                var editIntro = Console.ReadLine();
+                if (!string.IsNullOrWhiteSpace(editIntro) && editIntro.Trim().Equals("y", StringComparison.OrdinalIgnoreCase))
+                {
+                    EditIntroQuest(introPath, worldDir);
+                }
+
+            }
+            else if (cmd == "edit")
+            {
+                var introPath = Path.Combine(worldDir, "intro.json");
+                if (!File.Exists(introPath)) { Console.WriteLine("No intro.json found. Use 'create' command to make one."); continue; }
+                try
+                {
+                    EditIntroQuest(introPath, worldDir);
+                    Console.WriteLine("Introduction quest updated at: " + introPath);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Failed to edit introduction quest: " + ex.Message);
+                }
+            }
+        }
+    }
     // ImportFromCsServer2 removed
+
+    static void EditIntroQuest(string introPath, string worldDir)
+    {
+        var introText = File.ReadAllText(introPath);
+        var introQuest = JsonSerializer.Deserialize<Quest>(introText) ?? new Quest();
+        Console.WriteLine("Editing introduction quest: " + introQuest.name);
+        // basic quest metadata
+        var q = new Quest();
+        q.name = Prompt("quest name", "New Quest");
+        q.level = PromptInt("level", 1);
+        q.description = Prompt("description", "");
+        q.xp_reward = PromptInt("xp_reward", 0);
+        q.credit_reward = PromptInt("credit_reward", 0);
+        q.prerequisite_LVL = PromptInt("prerequisite_LVL", 1);
+        q.prerequisite_INT = PromptInt("prerequisite_INT", 1);
+        var steps = new List<JsonElement>();
+
+        // build steps
+        while (true)
+        {
+            Console.WriteLine("Add a step type: text | move | items | enemies | done");
+            Console.Write("> ");
+            var st = (Console.ReadLine() ?? "").Trim().ToLowerInvariant();
+            if (st == "done") break;
+            if (st == "text")
+            {
+                var t = Prompt("text", "");
+                var obj = new { text = t };
+                var el = JsonDocument.Parse(JsonSerializer.Serialize(obj, jopts)).RootElement.Clone();
+                steps.Add(el);
+            }
+            else if (st == "move")
+            {
+                var mv = Prompt("moveTo (location name)", "");
+                var obj = new { moveTo = mv };
+                var el = JsonDocument.Parse(JsonSerializer.Serialize(obj, jopts)).RootElement.Clone();
+                steps.Add(el);
+            }
+            else if (st == "items")
+            {
+                var dbPath = Path.Combine(worldDir, "ItemDB", "items.json");
+                var db = LoadItemDb(dbPath);
+                if (db.Count == 0) { Console.WriteLine("ItemDB is empty."); continue; }
+                var chosenItems = new List<Item>();
+                while (true)
+                {
+                    PrintItemDb(db);
+                    Console.Write("pick item index to add (or blank to finish): "); var pick = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(pick)) break;
+                    if (!int.TryParse(pick, out var pidx) || pidx < 0 || pidx >= db.Count) { Console.WriteLine("Invalid index"); continue; }
+                    var c = db[pidx];
+                    chosenItems.Add(new Item { name = c.name, icon = c.icon, description = c.description, value = c.value });
+                }
+                var obj = new { items = chosenItems };
+                var el = JsonDocument.Parse(JsonSerializer.Serialize(obj, jopts)).RootElement.Clone();
+                steps.Add(el);
+            }
+            else if (st == "enemies")
+            {
+                var enemies = new List<Enemy>();
+                while (true)
+                {
+                    var en = new Enemy();
+                    en.name = Prompt("enemy name", "Enemy");
+                    en.Level = PromptInt("Level", 1);
+                    en.hp = PromptInt("hp", 1);
+                    en.speed = PromptInt("speed", 1);
+                    en.intellect = PromptInt("int", 1);
+                    en.luck = PromptInt("luck", 1);
+                    en.credits = PromptInt("credits", 0);
+                    enemies.Add(en);
+                    if (!Confirm("Add another enemy? (y/N): ")) break;
+                }
+                var obj = new { enemies = enemies };
+                var el = JsonDocument.Parse(JsonSerializer.Serialize(obj, jopts)).RootElement.Clone();
+                steps.Add(el);
+            }
+            else
+            {
+                Console.WriteLine("Unknown step type");
+            }
+        }
+
+        q.steps = steps;
+        q.currentStageIndex = 0;
+
+        File.WriteAllText(introPath, JsonSerializer.Serialize(q, jopts));
+    }
 
     static string? ResolveWorldPath(string worldDir, string input)
     {

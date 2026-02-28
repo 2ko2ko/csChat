@@ -86,7 +86,7 @@ namespace SocketServer
                 string message = Encoding.ASCII.GetString(buffer, 0, bytes).Trim();
 
                 if (string.IsNullOrWhiteSpace(message)) continue;
-                
+
                 if (string.IsNullOrWhiteSpace(username)) // the first message is the clients username
                 {
                     //chatGPT change here
@@ -122,7 +122,7 @@ namespace SocketServer
                         QuestManager qm = new QuestManager();
                         Quest q = new Quest().Introduction();
                         //user.ActiveQuest = q;
-                        qm.StartQuest(q, client, user);
+                        qm.StartIntroQuest(q, client, user);
                     }
                     user.ConnectionCount++;
                     onlineUserList.Add(user);
@@ -135,12 +135,12 @@ namespace SocketServer
                 {
                     string[] parts = message.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                     string commandKey = parts[0].Substring(1).ToLower(); //remove leading ! from commands
-                    string[] args = parts.Length > 1 ? parts.Skip(1).ToArray() : new string [0]; // <-- fix das später
-                    
+                    string[] args = parts.Length > 1 ? parts.Skip(1).ToArray() : new string[0]; // <-- fix das später
+
                     //Dict Lookup und Parsing
                     if (CommandHandler.Commands.TryGetValue(commandKey, out var handler))
                     {
-                        handler(client, user, commandKey, args); 
+                        handler(client, user, commandKey, args);
                     }
                     else
                     {
@@ -166,7 +166,7 @@ namespace SocketServer
                     user.MessageCount++;
                     byte[] msg = Encoding.ASCII.GetBytes(string.Format("{0}: {1}", username, message));
                     //byte [] msg = Encoding.ASCII.GetBytes($"{username}: {message}"));
-                                        
+
                     foreach (TcpClient c in clients.Keys)
                     {
                         if (c != client)
