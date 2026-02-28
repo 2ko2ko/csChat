@@ -7,21 +7,51 @@ namespace SocketChatClient
 {
     class Program
     {
-        const int port = 8888; // Server port
+        const int defaultPort = 8888; // Default Server port
+        const string defaultIp = "127.0.0.1"; // Default IP
         const int bufferSize = 1024; // Buffer size
-        static TcpClient client = new TcpClient("127.0.0.1", port); // TCP client
-        static NetworkStream stream = client.GetStream(); // Network stream
+        
+        static TcpClient client;
+        static NetworkStream stream;
 
         static void Main(string[] args)
         {
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine("Connected to the chat server.");
-            //Console.WriteLine("Enter Username: ");
-            Thread receiveThread = new Thread(ReceiveMessages); // Thread to receive messages
-            receiveThread.Start();
-            SendMessages(); // Send messages in main thread
-            client.Close(); // Close client
-            Console.WriteLine("Disconnected from the chat server.");
+            string ip = defaultIp;
+            int port =defaultPort;
+            if (args.Length > 0)
+            {
+                ip = args[0];
+            }
+            if (args.Length > 1)
+            {
+                if (!int.TryParse(args[1], out port))
+                        {
+                            Console.WriteLine("Invalid Port, using Defualt 8888");
+                            port = defaultPort;
+                        }
+
+                //port = args[1]; // int != string... rip
+            }
+            
+            try
+            {
+                client = new TcpClient (ip, port); 
+                stream = client.GetStream();
+
+                Console.OutputEncoding = Encoding.UTF8;
+                Console.WriteLine("Connected to the chat server.");
+                //Console.WriteLine("Enter Username: ");
+                Thread receiveThread = new Thread(ReceiveMessages); // Thread to receive messages
+                receiveThread.Start();
+                SendMessages(); // Send messages in main thread
+                client.Close(); // Close client
+                Console.WriteLine("Disconnected from the chat server.");
+            }
+            catch (Exception conexc)
+            {
+                Console.WriteLine($"Connetion failed: {conexc.Message}");
+                Environment.Exit(1);
+            }
         }
 
         static void ReceiveMessages()
