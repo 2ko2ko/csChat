@@ -36,7 +36,7 @@
 
 
 ## Problems
-    -
+    - First created User does not heal
 
 ## To-Do
     - Quest generator
@@ -46,10 +46,11 @@
     - implement new itemDB compatible with WorldEditor
     - test new custom World
     - add quest items
+    - add introduction quest creation feature to world editor and replace the hardcoded introduction quest
 
 ## Attributes
-- Speed:        decides who strikes first, is the "attack value"
-- Intellect:    is the "defend value", is the prerequisite to finding quests
-- Luck:         is the "crit chance", if a crit occurs the damage is multiplied by 2, influeces the probability of a loot drop
-                the crit probability and loot drop probability depends on the players luck attribute and the enemys luck attribute if both values are equal base chance applies.
-                the probability scales logarithmic (500 luck = 99% crit chance, 10 luck = 9,52% crit chance) and the enemy luck value needs to be approximately 69.3 higher than the player's luck to halve the critical hit chance
+- Speed:        decides who strikes first, is the "attack value".
+- Intellect:    is the "defend value", is the prerequisite to finding quests.
+- Luck:         is the "crit chance", if a crit occurs the damage is multiplied by 2, it influeces the probability of a loot drop.
+                The crit probability and loot drop probability depends on the players luck attribute and the enemys luck attribute if both values are equal base chance applies.
+                The probability scales logarithmic (500 luck = 99% crit chance, 10 luck = 9,52% crit chance) and the enemy luck value needs to be approximately 69.3 higher than the player's luck to halve the critical hit chance
