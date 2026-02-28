@@ -164,8 +164,8 @@ namespace SocketServer
                     Console.WriteLine("{0}: {1}", username, message);
                     //User.UpdateUserMessageCount(user);
                     user.MessageCount++;
-                    byte[] msg = Encoding.ASCII.GetBytes(string.Format("{0}: {1}", username, message));
-                    //byte [] msg = Encoding.ASCII.GetBytes($"{username}: {message}"));
+                    //byte[] msg = Encoding.ASCII.GetBytes(string.Format("{0}: {1}", username, message));
+                    byte [] msg = Encoding.ASCII.GetBytes($"{username}: {message} ");
                                         
                     foreach (TcpClient c in clients.Keys)
                     {
