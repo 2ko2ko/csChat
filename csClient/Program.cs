@@ -37,8 +37,8 @@ namespace SocketChatClient
                 //port = args[1]; // int != string... rip
             }
             
-            //try
-            //{
+            try
+            {
                 client = new TcpClient (ip, port); 
                 stream = client.GetStream();
 
@@ -50,12 +50,12 @@ namespace SocketChatClient
                 SendMessages(); // Send messages in main thread
                 client.Close(); // Close client
                 Console.WriteLine("Disconnected from the chat server.");
-            /*}
+            }
             catch (Exception conexc)
             {
                 Console.WriteLine($"Connetion failed: {conexc.Message}");
                 Environment.Exit(1);
-            }*/
+            }
         }
 
         static void ReceiveMessages()

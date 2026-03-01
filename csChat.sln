@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csServer", "csServer\csServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "csServer2", "csServer2\csServer2.csproj", "{53E207DA-4FAA-EF57-543F-8B98171B0DC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuestEditor", "QuestEditor\QuestEditor.csproj", "{7A230C74-0E76-1FEF-F47C-11EAB05F5649}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WorldEditor", "WorldEditor\WorldEditor.csproj", "{7F982D46-EA67-B7F3-7745-B21C606DA061}"
 EndProject
 Global
