@@ -14,13 +14,15 @@ namespace SocketChatClient
         static TcpClient client;
         public static NetworkStream stream;
 
+        public static IOHandler? siohandle {get; set;} //set static refrence to IO Handler, for multiple IO handlers (Multiboxing) refactor this
+
         static void Main(string[] args)
         {
             string ip = defaultIp;
             int port = defaultPort;
             if (args.Length > 0)
             {
-                if (args[0] == "h" || args[0] == "help") //if h or help show help instead of connecting to help
+                if (args[0] == "h" || args[0] == "help" || args[0] == "-help" || args[0] == "-h") //if h or help show help instead of connecting to help
                 {
                     Console.WriteLine($"Usage: \ncsClient [ip] [port] \n");
                     Environment.Exit(0);
@@ -46,6 +48,10 @@ namespace SocketChatClient
                 Console.WriteLine("Connected to the chat server.");
                 //Console.WriteLine("Enter Username: ");
                 Thread receiveThread = new Thread(ReceiveMessages); // Thread to receive messages
+
+                siohandle = new IOHandler(stream); //assigns IO Handler to static refrence
+
+                //SendMessages(); // SendMessages must be AFTER receiveThread cause it contains a while true loop. Maybe create new Send Thread?
                 receiveThread.Start();
                 SendMessages(); // Send messages in main thread
                 client.Close(); // Close client
@@ -81,8 +87,10 @@ namespace SocketChatClient
                     }
 
                     message.Length--; // Remove \n from message
-
-                    Console.WriteLine(message); // Print message
+                    
+                    siohandle?.InMessage(message.ToString());
+                    //Console.WriteLine(message); // Print message
+                    //siohandle.RedrawLine();
 
                     message.Clear(); // Clear message for next read
                 }
@@ -96,46 +104,24 @@ namespace SocketChatClient
 
         static void SendMessages()
         {
-            /*while (true)
-            {
-                try
-                {
-                    string input = Console.ReadLine(); // Read input from console
-
-                    if (input == "exit") // Exit command
-                    {
-                        break;
-                    }
-
-                    input += "\n"; // Add \n to input and convert to bytes
-                    byte[] buffer = Encoding.UTF8.GetBytes(input);
-
-                    stream.Write(buffer, 0, buffer.Length); // Write and flush buffer
-                    stream.Flush();
-                }
-                catch (Exception ex) // Error
-                {
-                    Console.WriteLine("Error: {0}", ex.Message);
-                    break;
-                }
-            }*/
-            //InputeHandler ihandle = new InputeHandler(stream);
-            var ihandle = new InputeHandler(stream);
-            ihandle.Run();
+            //var ihandle = new IOHandler(stream); // starts IO Handler
+            //siohandle = ihandle; //assigns IO Handler to static refrence 
+            siohandle.Run(); //inits IO Handler
         }
     }
 
-    public class InputeHandler
+    public class IOHandler
     {
         private readonly List<string> history = new List<string>();
         private int historyIndex = -1;
         private string currentIndex = "";
         private NetworkStream _stream;
+        private static readonly object terminallock = new Object ();
 
         private static Dictionary<ConsoleKey, Action> keyActions = new Dictionary<ConsoleKey, Action>();
 
-        public InputeHandler(NetworkStream stream)
-        //public InputeHandler()
+        public IOHandler(NetworkStream stream)
+        //public IOHandler()
         {
             _stream = stream;
             //private NetworkStream _stream = Program;
@@ -176,7 +162,7 @@ namespace SocketChatClient
             }
         }
 
-        private void RedrawLine()
+        public void RedrawLine()
         {
             Console.SetCursorPosition(0, Console.CursorTop);
             Console.Write(new string(' ', Console.WindowWidth -1));
@@ -193,8 +179,8 @@ namespace SocketChatClient
                     history.Add(currentIndex);
                 }
                 historyIndex = history.Count;
-                
-                string input = currentIndex + "\n";
+            
+                string input = currentIndex;
                 byte[] buffer = Encoding.UTF8.GetBytes(input);
                 _stream.Write(buffer, 0, buffer.Length);
                 _stream.Flush();
@@ -243,11 +229,21 @@ namespace SocketChatClient
             RedrawLine();
         }
 
+        public void InMessage(string message)
+        {
+            string indexBuffer = currentIndex;
+
+            Console.SetCursorPosition(0, Console.CursorTop);
+            Console.Write(new string(' ', Console.WindowWidth - 1));
+            Console.SetCursorPosition(0, Console.CursorTop);
+
+            Console.WriteLine(message);
+            Console.Out.Flush();
+
+            Console.Write(indexBuffer);
+            Console.Out.Flush();
+        }
+
     }
 }
-
-
-
-
-
 

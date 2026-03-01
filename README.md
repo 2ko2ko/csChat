@@ -1,42 +1,17 @@
 # csChat
-## Available Commands
 
-- `!class [class_name]`: Sets the user's class to the specified class name. Valid class names are: Soldier, Engineer, Explorer.
+Minimalist Client/Server TextRPG and Chat.
 
-- `!inventory`: Displays your inventory, showing all the items you currently possess.
-  `!use [item name]`: Use an item from your inventory by specifying its name.   
-- `!i [item name]`: Use an item from your inventory by specifying its name.
-- `!ir [item name]`: Remove an item from your inventory by specifying its name.
-- `!ii [item name]`: Inspect an item in your inventory to get more information about it.
-- `!is [item name]`: Sell an item from your inventory to earn in-game currency.
-- `!isa [item name]`: Sell all items of a specific name from your inventory.
+!help
+for commands when connected.
 
-- `!shop`: Displays the local shop's inventory if there is one available.
-- `!shop [item name]`: Buy a specific item from the shop by providing its name.
+## Notes 
+    csClient
+    - potential race condition when receving/sending message at the same time (not an issue at the moment, but keep in mind for potential more complex clien-server interactions)
+      solution: saving received messages in Queue and have it emptied by IOHandler.Run().
 
-- `!revive`: Revives your character, allowing you to continue playing.
-
-- `!fight [enemy_level]`: Initiates a battle with an enemy of the specified level.
-
-- `!duel [username]`: Initiates a battle with another online user, provided their username.
-
-- `!allocate_attributes [speed] [intellect] [luck]`: Increases your character's speed, intellect, and luck attributes by the specified amounts.
-
-- `!attributes`: Displays your character's current attributes, including speed, intellect, and luck.
-
-- `!users`: Displays a list of all connected users.
-
-- `!local`: Displays a list of all nearby users in the game.
-
-- `!quest`: Progress your Active Quest.
-- `!qg [Questname]`: Display/Accept a local Quest.
-
-- `![username] [message]`: Send a private message to a specific user by mentioning their username.
-
-
-
-## Problems
-    - 
+## Issues
+    -
 
 ## To-Do
     - Quest generator
